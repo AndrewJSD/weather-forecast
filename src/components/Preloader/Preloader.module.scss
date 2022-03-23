@@ -1,0 +1,31 @@
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  gap: 100px;
+  user-select: none;
+
+  & > img {
+    animation: slide-top 1s ease-in-out infinite alternate;
+    width: 300px;
+    pointer-events: none;
+  }
+
+  & > h4 {
+    color: white;
+    font-weight: 800;
+    font-size: 30px;
+  }
+}
+
+@keyframes slide-top {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-30px);
+  }
+}
