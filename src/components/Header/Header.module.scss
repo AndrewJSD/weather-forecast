@@ -1,0 +1,32 @@
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 12px;
+
+  & > span {
+    font-size: 36px;
+    color: white;
+    font-weight: 800;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .header {
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .header > span {
+    font-size: 30px;
+  }
+}
+@media screen and (max-width: 415px) {
+  .header > span {
+    font-size: 24px;
+  }
+}

@@ -1,0 +1,29 @@
+.card {
+  border: 2px solid white;
+  padding: 10px;
+  border-radius: 10px;
+  transition: transform .3s ease-in-out;
+  user-select: none;
+  cursor: pointer;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  &:hover {
+    transform: scale(1.05, 1.05);
+  }
+}
+
+.date {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    border: 1px solid white;
+    width: calc( 100% - 5px);
+    left: 0;
+    top: 100%;
+  }
+}

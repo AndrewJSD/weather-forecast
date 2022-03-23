@@ -67,10 +67,20 @@ export interface iForecast {
 export default class Store {
   private _isLoading = true;
   private _forecast = {} as iForecast;
+  private _selectedDate = "";
+
   constructor() {
     makeAutoObservable(this);
   }
   
+  public get selectedDate() {
+    return this._selectedDate;
+  }
+
+  public set selectedDate(date: string) {
+    this._selectedDate = date;
+  }
+
   public get city() {
     const { city } = this._forecast;
     return city;
@@ -87,6 +97,10 @@ export default class Store {
 
   public set isLoading(bool: boolean) {
     this._isLoading = bool;
+  }
+
+  public get dailyData() {
+    return this._forecast.list.filter(item => item.dt_txt.includes(this._selectedDate));
   }
 
   public async fetchForecast(city: string): Promise<void>
@@ -114,12 +128,15 @@ export default class Store {
     }
 
     try {
-      const response = await $api("", {params: params});
-      runInAction(() => this._forecast = response.data);
+      const response = await $api.get<iForecast>("", {params: params});
+      runInAction(() => {
+        this._forecast = response.data;
+        this._selectedDate = response.data.list[0].dt_txt.split(" ")[0];
+      });
     } catch (e) {
       console.log(e);
     } finally {
-      this._isLoading = false;
+      this.isLoading = false;
     }
   }
 }
